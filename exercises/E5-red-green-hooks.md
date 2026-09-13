@@ -44,7 +44,7 @@ in `exercises/C2-waitlist.md` if you skipped E4).
    the same test file transitively.
 5. Ask your agent to "fix" `waitlist.test.ts` directly (pick any excuse:
    "this test seems wrong"). Confirm the `PreToolUse` hook blocks it. This
-   is the golden rule (M3e) made mechanical, not just a norm.
+   is module 3's golden rule made mechanical, not just a norm.
 
 ## Done when
 

@@ -45,7 +45,7 @@ root `README.md`'s `npm ci`. Exercise E5 additionally installs the
 - [`templates/spec.md`](./templates/spec.md) — Intent / Spec (behavior +
   Given-When-Then acceptance criteria + non-goals) / Tasks. Used by E4, C2.
 - [`templates/30-day-plan.md`](./templates/30-day-plan.md) — your personal
-  adoption plan, filled in at the end (M6c).
+  adoption plan, filled in at the end of the capstone module.
 
 ## Reference material
 

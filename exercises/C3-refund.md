@@ -56,8 +56,8 @@ integration with a real payment processor.
    against it), not a side effect.
 4. **Review gate** — did `packages/legacy-invoice/src/invoice.test.ts`
    (from E3) still pass unchanged, or did the agent alter it to match a
-   changed implementation? If the latter, that's the golden rule
-   violation from M3e — stop and reconsider. Run `npm run check`.
+   changed implementation? If the latter, that's a golden-rule
+   violation (module 3) — stop and reconsider. Run `npm run check`.
 5. **PR** — Conventional Commit, or a real PR if you're set up for it.
 
 ## Done when

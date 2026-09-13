@@ -15,8 +15,9 @@ A fresh clone of this repo (`npm ci` run, nothing else touched).
 ## Steps
 
 1. Map your agent (Claude Code, Copilot, or whatever you use day to day) to
-   the five harness axes from M1b: model, context, tools, feedback loops,
-   permissions. One line each — what is it for your setup, right now?
+   the five harness axes from module 1: model, context, tools, feedback
+   loops, permissions. One line each — what is it for your setup, right
+   now?
 2. Ask your agent the same question twice, in two different permission
    modes:
    - **Read-only / plan mode**: "Explain what `packages/pricing` does and

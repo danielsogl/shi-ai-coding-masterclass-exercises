@@ -1,8 +1,8 @@
 # My 30-day AI adoption plan
 
-Fill this in for yourself at the end of the workshop (Exercise C-closing /
-M6c). One measurable signal per week — something you can actually check on
-day 30, not a feeling.
+Fill this in for yourself at the end of the workshop, after the capstones.
+One measurable signal per week — something you can actually check on day
+30, not a feeling.
 
 ## Week 1: Context
 

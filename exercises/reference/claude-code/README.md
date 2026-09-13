@@ -24,7 +24,7 @@ if it's missing; `stop-verify.sh` doesn't use `jq` at all.
   regression anywhere, including the flaky test if it genuinely fails on
   that run, still blocks.
 - `hooks/deny-test-edits.sh` — a `PreToolUse` hook matched on `Edit|Write`.
-  Denies any edit to a `*.test.ts` file. This is the golden rule from M3e
+  Denies any edit to a `*.test.ts` file. This is module 3's golden rule
   made mechanical: an agent that disagrees with a test should say so, not
   quietly change it. Reads the hook's JSON payload from stdin; if that
   payload isn't valid JSON, it denies and exits `2` with a clear message
@@ -60,5 +60,6 @@ task as the skill above, but run as a sub-agent instead: it gets its own
 context window, and only its final written summary comes back to the
 calling session — none of the files it read or the throwaway script it ran
 pollute the caller's context. This is the "context firewall" pattern from
-M4c / Exercise E7. Compare the two: a skill runs inline in your context; a
-sub-agent runs in its own and firewalls everything except its final report.
+module 4 / Exercise E7. Compare the two: a skill runs inline in your
+context; a sub-agent runs in its own and firewalls everything except its
+final report.

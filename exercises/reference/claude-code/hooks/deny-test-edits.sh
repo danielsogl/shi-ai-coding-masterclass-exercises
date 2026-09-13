@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # PreToolUse hook (matcher: Edit|Write): blocks edits to test files.
 #
-# The golden rule (M3e): an agent must never modify the tests that verify
+# The golden rule (module 3): an agent must never modify the tests that verify
 # its own work. If the agent believes a test is wrong, that's a message for
 # a human, not a same-session edit.
 #
