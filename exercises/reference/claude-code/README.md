@@ -6,19 +6,33 @@ wired up in the starter repo by default — Exercise E5 has you install
 
 ## `settings.json` + `hooks/`
 
+`deny-test-edits.sh` requires `jq` (`brew install jq` / `apt install jq`
+— not preinstalled on stock macOS) and fails closed with a clear message
+if it's missing; `stop-verify.sh` doesn't use `jq` at all.
+
 - `hooks/stop-verify.sh` — a `Stop` hook. Runs `npm run typecheck` and
   `npm run test:affected` before letting a turn end; exits `2` (blocking)
-  on failure so Claude sees the failure and keeps working. Uses
-  `test:affected` rather than the full suite on purpose — see the comment
-  in the script and Exercise E6.
+  on failure so Claude sees the failure and keeps working. It does not
+  read the hook's JSON payload from stdin at all — it only needs
+  `$CLAUDE_PROJECT_DIR` — so malformed or missing stdin has no effect
+  either way. Uses `test:affected` rather than the full suite, and
+  additionally skips any test named with a `BASELINE:` prefix (see the
+  script's comment and Exercise E6): this repo ships one known,
+  pre-existing, accepted-as-broken test, and a hook that blocks every
+  turn on an unrelated, already-known failure trains you to silence the
+  hook instead of trusting it. Nothing else is excluded — a real
+  regression anywhere, including the flaky test if it genuinely fails on
+  that run, still blocks.
 - `hooks/deny-test-edits.sh` — a `PreToolUse` hook matched on `Edit|Write`.
   Denies any edit to a `*.test.ts` file. This is the golden rule from M3e
   made mechanical: an agent that disagrees with a test should say so, not
-  quietly change it.
+  quietly change it. Reads the hook's JSON payload from stdin; if that
+  payload isn't valid JSON, it denies and exits `2` with a clear message
+  (fails closed) rather than crashing on a raw parser error.
 
-Both scripts read the hook's JSON payload from stdin and speak the current
-hook protocol (`code.claude.com/docs/en/hooks`, checked 2026-09): exit code
-`2` always blocks, and `PreToolUse` can additionally return
+`deny-test-edits.sh` speaks the current `PreToolUse` hook protocol
+(`code.claude.com/docs/en/hooks`, checked 2026-09): exit code `2` always
+blocks, and the hook returns
 `{"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "deny", "permissionDecisionReason": "..."}}`
 on stdout to explain the denial. Test a hook standalone before wiring it up:
 

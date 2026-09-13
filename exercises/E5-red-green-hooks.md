@@ -26,12 +26,22 @@ in `exercises/C2-waitlist.md` if you skipped E4).
    clarity) and confirm the tests still pass afterward.
 4. Install the hooks: copy `exercises/reference/claude-code/settings.json`
    and `hooks/` into `.claude/` (see that folder's README for the exact
-   commands and the current Copilot equivalent/gap). Confirm both hooks
-   work standalone before trusting them:
+   commands, the `jq` prerequisite, and the current Copilot
+   equivalent/gap). Confirm both hooks work standalone before trusting
+   them:
    ```sh
    echo '{"tool_name":"Edit","tool_input":{"file_path":"apps/api/src/waitlist.test.ts"}}' \
      | .claude/hooks/deny-test-edits.sh; echo "exit: $?"   # expect 2
    ```
+   The `Stop` hook (`stop-verify.sh`) runs typecheck + `test:affected`,
+   but skips any test named with a `BASELINE:` prefix (this repo has
+   exactly one: `apps/api/src/server.test.ts`'s health-status test — see
+   Exercise E6). That's the only exclusion; a real regression anywhere
+   else, including the flaky test if it genuinely fails on that run,
+   still blocks the turn. Try it: edit `apps/api/src/server.ts` to
+   introduce a real bug and confirm the hook blocks (exit 2); revert and
+   confirm a clean change doesn't (exit 0), even though it still pulls in
+   the same test file transitively.
 5. Ask your agent to "fix" `waitlist.test.ts` directly (pick any excuse:
    "this test seems wrong"). Confirm the `PreToolUse` hook blocks it. This
    is the golden rule (M3e) made mechanical, not just a norm.

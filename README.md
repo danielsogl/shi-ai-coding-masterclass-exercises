@@ -37,10 +37,13 @@ This repo is **not** meant to be all-green out of the box. Two things are
 intentional, not bugs you introduced by cloning:
 
 - **One test always fails**: `apps/api/src/server.test.ts` →
-  `Tickets API > reports health status as ok`. This is a pre-existing,
-  deterministic, broken baseline — unrelated to any exercise. Exercise E6
-  has you record it rather than fix it, which is itself the point of that
-  exercise.
+  `Tickets API > BASELINE: reports health status as ok`. This is a
+  pre-existing, deterministic, broken baseline — unrelated to any
+  exercise. The `BASELINE:` prefix is the one place this is recorded; the
+  example `Stop` hook in `exercises/reference/claude-code/` reads it to
+  avoid blocking every turn on this one known failure (see that folder's
+  README). Exercise E6 has you record it rather than fix it, which is
+  itself the point of that exercise.
 - **One test fails roughly 1 run in 4**: `apps/api/src/server.test.ts` →
   `Tickets API > FLAKY: availability is ready shortly after the server
   starts`. It races a simulated async cache warm-up. Run `npm test` a

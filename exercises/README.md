@@ -6,6 +6,13 @@ the codebase itself). Every exercise works with Claude Code or GitHub
 Copilot; each one also names a one-line variant for using your own repo
 instead.
 
+## Prerequisites
+
+Everything needed for E1-E4, E7, E8, and the capstones is covered by the
+root `README.md`'s `npm ci`. Exercise E5 additionally installs the
+`exercises/reference/claude-code/` hooks, which require `jq`
+(`brew install jq` / `apt install jq`) — not preinstalled on stock macOS.
+
 ## How to work through these
 
 - **In this repo**: clone it, `npm ci`, and work through the exercises in

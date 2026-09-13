@@ -30,8 +30,11 @@ describe('Tickets API', () => {
 
   // BROKEN BASELINE — deterministic, pre-existing, unrelated to any
   // exercise. See exercises/E6-real-world-constraints.md: record it, don't
-  // "fix" it as part of an unrelated exercise.
-  it('reports health status as ok', async () => {
+  // "fix" it as part of an unrelated exercise. The `BASELINE:` prefix is
+  // the single source of truth for "known, accepted-as-broken, not this
+  // change's problem" — exercises/reference/claude-code/hooks/stop-verify.sh
+  // reads it to avoid blocking every unrelated turn on this one test.
+  it('BASELINE: reports health status as ok', async () => {
     const res = await fetch(`${base}/health`);
     const body = await res.json();
     expect(body).toEqual({ status: 'ok' });
