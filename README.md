@@ -61,7 +61,7 @@ percentage and test quality are not the same thing.
 - `npm run typecheck` — `tsc --noEmit` across the whole workspace.
 - `npm run lint` — ESLint (flat config).
 - `npm test` — the full Vitest suite.
-- `npm run test:affected` — `vitest --changed`, only the tests touched by
+- `npm run test:affected` — `vitest run --changed`, only the tests touched by
   your current (uncommitted or last-commit) change. Used by the example
   `Stop` hook in `exercises/reference/claude-code/`.
 - `npm run check` — all three, in order.

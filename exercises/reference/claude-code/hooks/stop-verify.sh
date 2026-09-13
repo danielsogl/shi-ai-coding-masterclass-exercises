@@ -3,7 +3,7 @@
 # the current change pass. Exit 2 blocks the stop; stderr goes back to
 # Claude so it can act on the failure.
 #
-# Uses `test:affected` (vitest --changed), not the full suite: this repo
+# Uses `test:affected` (vitest run --changed), not the full suite: this repo
 # ships with one known-broken baseline test and one flaky test (see
 # exercises/E6-real-world-constraints.md) that are not this hook's job to
 # fix. A Stop hook that fails a turn on pre-existing, unrelated breakage

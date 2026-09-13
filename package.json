@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:affected": "vitest --changed",
+    "test:affected": "vitest run --changed",
     "check": "npm run typecheck && npm run lint && npm test"
   },
   "devDependencies": {
