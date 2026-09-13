@@ -54,8 +54,10 @@ root `README.md`'s `npm ci`. Exercise E5 additionally installs the
   `PreToolUse` hook denying edits to test files), an example skill, an
   example sub-agent. Used in E5 and E7.
 - [`reference/copilot/`](./reference/copilot/) — the Copilot equivalents,
-  and one honest gap (hooks are preview/JetBrains-scoped as of 2026-09 —
-  see that folder's README before relying on it).
+  including working `preToolUse`/`agentStop` hooks (Copilot CLI + cloud
+  agent). One remaining caveat: the exact `toolArgs` field name for a file
+  path isn't fully pinned down by the public schema — see that folder's
+  README.
 
 None of this reference material is wired into the starter repo by
 default — you install it yourself as part of E5/E7, which is the point:

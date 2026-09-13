@@ -28,20 +28,59 @@ for **Copilot code review** (`.github/skills/<name>/SKILL.md`, GA
 modes the same way. Copy it in for code-review use; verify current docs
 before assuming it also fires in chat.
 
-## Hooks — partial equivalent, verify before relying on it
+## `hooks.json` + `hooks/` → hooks
 
-GitHub announced **Copilot agent hooks in public preview** (changelog
-2026-03-11, alongside JetBrains IDE agentic improvements): a
-`.github/hooks/hooks.json` file with events `userPromptSubmitted`,
-`preToolUse`, `postToolUse`, and `errorOccurred`. That is a real equivalent
-to Claude Code's `PreToolUse`/`Stop` hooks in spirit.
+Updated 2026-09-13 against the primary docs (the March 2026 changelog we
+previously cited was JetBrains-scoped preview; the reference docs below
+have since expanded well past that — this section replaces our earlier,
+now-stale claim that no deny schema was published). Hooks run on **two
+surfaces**: the Copilot CLI (locally, same shell as the CLI) and the
+Copilot cloud agent (in its ephemeral sandbox, reading only
+`.github/hooks/*.json` from the cloned repo) — not confirmed for VS
+Code/JetBrains as of this writing.
+(`docs.github.com/en/copilot/reference/hooks-reference`,
+`docs.github.com/en/copilot/concepts/agents/hooks`)
 
-We did **not** include working `hooks.json` examples here, on purpose: at
-the time of writing, GitHub's public changelog names the file location and
-event list but does not publish the JSON schema for how a hook blocks or
-denies an action (the piece our `deny-test-edits.sh` and `stop-verify.sh`
-depend on), and the feature was announced as JetBrains-IDE-scoped preview,
-not a cross-editor CLI feature the way Claude Code hooks are. Rather than
-invent a schema and risk shipping something that silently doesn't work,
-this is the one item in this reference set we're flagging as **"exists,
-but verify the current docs before you build on it."**
+Config file: `.github/hooks/hooks.json` —
+`{"version": 1, "hooks": {"<eventName>": [{"type": "command", "bash": "...", ...}]}}`.
+Event names include `sessionStart`/`sessionEnd`, `userPromptSubmitted`,
+`preToolUse`/`postToolUse`, `agentStop`/`subagentStop`, and
+`errorOccurred`.
+
+Both reference scripts require `jq` (`brew install jq` / `apt install jq`)
+and fail closed (a `deny`/`block` decision) with a clear message if it's
+missing, rather than crashing. Both are included here, working and tested
+standalone, same as the Claude Code versions next door:
+
+- `hooks/deny-test-edits.sh` (`preToolUse`) — denies `create`/`edit` tool
+  calls targeting `*.test.ts`. Decision goes on stdout as JSON —
+  `{"permissionDecision": "allow|deny|ask", "permissionDecisionReason": "..."}`
+  — **not** via exit code the way Claude Code uses exit 2; this script
+  always exits 0. (`ask` is treated as `deny` under cloud agent, since
+  there's no user to ask.)
+- `hooks/stop-verify.sh` (`agentStop`) — the real equivalent of Claude
+  Code's `Stop` hook: runs typecheck + `test:affected`, blocking via
+  `{"decision": "block", "reason": "..."}` (forces another turn using
+  `reason` as the next prompt) when something fails. Same `BASELINE:`
+  exclusion as the Claude Code version — see
+  `exercises/E6-real-world-constraints.md`.
+
+Test either one standalone before wiring it up:
+
+```sh
+echo '{"toolName":"edit","toolArgs":{"path":"packages/pricing/src/pricing.test.ts"}}' \
+  | ./hooks/deny-test-edits.sh   # {"permissionDecision": "deny", ...}
+```
+
+To install: copy `hooks.json` to `.github/hooks/hooks.json` and both
+scripts to `.github/hooks/` (flat — the `bash` paths in `hooks.json`
+already assume that layout), then `chmod +x .github/hooks/*.sh`.
+
+One caveat we could not fully close: the exact `toolArgs` field name for
+a file path on the `create`/`edit` tools isn't pinned down by the schema
+doc (which only says `toolArgs: unknown`) the way `tool_input.file_path`
+is for Claude Code — `deny-test-edits.sh` tries `path`, `file`, and
+`file_path` to cover the likely options, but verify against your actual
+Copilot CLI version's payloads (or a `postToolUse` log) before trusting
+it in a real session; we tested it only against hand-built payloads
+matching the documented schema, not a live Copilot run.
