@@ -53,23 +53,33 @@ missing, rather than crashing. Both are included here, working and tested
 standalone, same as the Claude Code versions next door:
 
 - `hooks/deny-test-edits.sh` (`preToolUse`) — denies `create`/`edit` tool
-  calls targeting `*.test.ts`. Decision goes on stdout as JSON —
-  `{"permissionDecision": "allow|deny|ask", "permissionDecisionReason": "..."}`
-  — **not** via exit code the way Claude Code uses exit 2; this script
-  always exits 0. (`ask` is treated as `deny` under cloud agent, since
-  there's no user to ask.)
+  calls targeting `*.test.ts`. `preToolUse` supports denial **both** ways,
+  unlike what we previously claimed here: via stdout JSON
+  (`{"permissionDecision": "allow|deny|ask", "permissionDecisionReason": "..."}`)
+  **and** via exit code — the docs state "exit `2` is treated as a deny:
+  any stdout JSON is merged with the deny decision" and "a non-zero exit
+  (other than exit `2`) denies the tool call with 'Denied by preToolUse
+  hook (hook errored)'". This script uses exit `2` for every deny path
+  (matching Claude Code's own convention) and still prints the reason
+  JSON, which Copilot merges in; the happy-path allow exits `0` with an
+  explicit `{"permissionDecision": "allow"}` (exit 0 with empty stdout is
+  not documented as an implicit allow, so we don't rely on that).
+  (`ask` is treated as `deny` under cloud agent, since there's no user to
+  ask.)
 - `hooks/stop-verify.sh` (`agentStop`) — the real equivalent of Claude
   Code's `Stop` hook: runs typecheck + `test:affected`, blocking via
   `{"decision": "block", "reason": "..."}` (forces another turn using
-  `reason` as the next prompt) when something fails. Same `BASELINE:`
-  exclusion as the Claude Code version — see
-  `exercises/E6-real-world-constraints.md`.
+  `reason` as the next prompt) when something fails. Unlike `preToolUse`,
+  the docs don't describe any exit-code meaning for `agentStop` — only the
+  `decision` field in stdout JSON matters — so this script always exits
+  `0` and lets the JSON carry the decision. Same `BASELINE:` exclusion as
+  the Claude Code version — see `exercises/E6-real-world-constraints.md`.
 
 Test either one standalone before wiring it up:
 
 ```sh
 echo '{"toolName":"edit","toolArgs":{"path":"packages/pricing/src/pricing.test.ts"}}' \
-  | ./hooks/deny-test-edits.sh   # {"permissionDecision": "deny", ...}
+  | ./hooks/deny-test-edits.sh; echo "exit: $?"   # deny JSON, exit: 2
 ```
 
 To install: copy `hooks.json` to `.github/hooks/hooks.json` and both

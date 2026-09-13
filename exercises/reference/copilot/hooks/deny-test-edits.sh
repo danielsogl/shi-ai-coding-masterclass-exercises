@@ -4,16 +4,24 @@
 # deny-test-edits.sh next door, translated to Copilot's hook schema
 # (docs.github.com/en/copilot/reference/hooks-reference, checked 2026-09).
 #
-# Copilot's preToolUse decision is conveyed entirely through the JSON
-# printed to stdout (permissionDecision: allow|deny|ask), NOT through the
-# exit code the way Claude Code's hook uses exit 2 — this script always
-# exits 0. Every failure mode below fails CLOSED (denies) rather than
-# crashing open.
+# Copilot's preToolUse hooks support BOTH exit-code and stdout-JSON
+# denial: "exit 2 is treated as a deny: any stdout JSON is merged with the
+# deny decision", and "a non-zero exit (other than exit 2) denies the tool
+# call with 'Denied by preToolUse hook (hook errored)'" (same doc). We use
+# exit 2 for every deny path, including the fail-closed ones below, and
+# still print the reason JSON where we can — Copilot merges it in. Only
+# the happy-path allow needs stdout JSON at all (exit 0 with no output is
+# not documented as an implicit allow).
 set -uo pipefail
 
 deny() {
-  jq -n --arg reason "$1" '{permissionDecision: "deny", permissionDecisionReason: $reason}'
-  exit 0
+  local reason="$1"
+  if command -v jq >/dev/null 2>&1; then
+    jq -n --arg reason "$reason" '{permissionDecision: "deny", permissionDecisionReason: $reason}'
+  else
+    echo "deny-test-edits.sh: $reason" >&2
+  fi
+  exit 2
 }
 
 allow() {
