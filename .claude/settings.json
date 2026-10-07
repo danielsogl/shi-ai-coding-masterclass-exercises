@@ -16,7 +16,10 @@
     "deny": [
       "Bash(git push *)",
       "Bash(git reset --hard *)",
-      "Bash(npm publish *)"
+      "Bash(npm publish *)",
+      "Read(**/.env*)",
+      "Edit(**/.env*)",
+      "Write(**/.env*)"
     ]
   },
   "enabledMcpjsonServers": [
@@ -58,5 +61,23 @@
         ]
       }
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": false,
+    "allowUnsandboxedCommands": false,
+    "filesystem": {
+      "allowWrite": [
+        "~/.npm"
+      ]
+    },
+    "network": {
+      "allowLocalBinding": true,
+      "allowedDomains": [
+        "registry.npmjs.org",
+        "github.com",
+        "*.github.com"
+      ]
+    }
   }
 }
