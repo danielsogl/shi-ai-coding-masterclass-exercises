@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "node .agents/hooks/baseline.mjs",
+        "powershell": "node .agents/hooks/baseline.mjs",
+        "timeoutSec": 300
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "node .agents/hooks/lint.mjs",
+        "powershell": "node .agents/hooks/lint.mjs",
+        "timeoutSec": 120
+      }
+    ],
+    "agentStop": [
+      {
+        "type": "command",
+        "bash": "node .agents/hooks/verify.mjs",
+        "powershell": "node .agents/hooks/verify.mjs",
+        "timeoutSec": 300
+      }
+    ]
+  }
+}

@@ -23,4 +23,15 @@
       <span class="nav-label">Board</span>
     </a>
   </nav>
+
+  <mat-button-toggle-group
+    aria-label="Theme"
+    hideSingleSelectionIndicator
+    [value]="theme.choice()"
+    (change)="theme.set($event.value)"
+  >
+    <mat-button-toggle value="system">System</mat-button-toggle>
+    <mat-button-toggle value="light">Light</mat-button-toggle>
+    <mat-button-toggle value="dark">Dark</mat-button-toggle>
+  </mat-button-toggle-group>
 </mat-toolbar>
