@@ -1,5 +1,4 @@
 {
-  "chat.permissions.default": "default",
   "chat.useClaudeMdFile": false,
   "chat.useClaudeHooks": false,
   "chat.tools.terminal.autoApprove": {
@@ -19,5 +18,8 @@
   "prettier.documentSelectors": ["**/*.feature"],
   "[cucumber]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "chat.tools.urls.autoApprove": {
+    "https://mcp.context7.com/*": true
   }
 }

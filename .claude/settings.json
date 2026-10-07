@@ -10,12 +10,17 @@
       "Bash(npm ci)",
       "Bash(git status *)",
       "Bash(git diff *)",
-      "Bash(git log *)"
+      "Bash(git log *)",
+      "mcp__context7__*"
     ],
     "deny": [
       "Bash(git push *)",
       "Bash(git reset --hard *)",
       "Bash(npm publish *)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "context7",
+    "playwright"
+  ]
 }
