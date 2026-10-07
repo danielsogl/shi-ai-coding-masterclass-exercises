@@ -7,5 +7,37 @@
   },
   "chat.tools.urls.autoApprove": {
     "https://mcp.context7.com/*": true
+  },
+  // Sandbox (VS Code 1.140). The agent's terminal commands run in it.
+  // macOS: VS Code already lets the sandbox read nvm, fnm, Volta, asdf and mise Node installs.
+  // allowRead adds the npm and Angular CLI config files, allowWrite the npm log folder.
+  // Known limit: VS Code always lets the sandbox read the workspace, so denyRead does not hide
+  // server/.env from a terminal command. The preToolUse hook in .github/hooks is the guard here.
+  "chat.agent.sandbox.enabled": "on",
+  "chat.agent.sandbox.enabledWindows": "on",
+  "chat.agent.sandbox.allowUnsandboxedCommands": false,
+  "chat.agent.sandbox.fileSystem.mac": {
+    "denyRead": [
+      "./server/.env"
+    ],
+    "allowRead": [
+      "~/.npmrc",
+      "~/.angular",
+      "~/.angular-config.json"
+    ],
+    "allowWrite": [
+      "~/.npm",
+      "~/.angular"
+    ]
+  },
+  "chat.agent.sandbox.fileSystem.linux": {
+    "denyRead": [
+      "./server/.env"
+    ]
+  },
+  "chat.agent.sandbox.fileSystem.windows": {
+    "denyRead": [
+      "./server/.env"
+    ]
   }
 }

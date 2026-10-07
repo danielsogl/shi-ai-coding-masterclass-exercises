@@ -24,6 +24,14 @@
         "powershell": "node .agents/hooks/verify.mjs",
         "timeoutSec": 300
       }
+    ],
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "node .agents/hooks/deny-env.mjs",
+        "powershell": "node .agents/hooks/deny-env.mjs",
+        "timeoutSec": 30
+      }
     ]
   }
 }
