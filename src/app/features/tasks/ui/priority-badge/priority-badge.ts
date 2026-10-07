@@ -32,14 +32,14 @@ import { TaskPriority } from "../../data/models/task.model";
     }
 
     .badge--high {
-      background-color: #fde2e1;
-      color: #8a1c13;
+      background-color: var(--mat-sys-error-container);
+      color: var(--mat-sys-on-error-container);
       border-color: color-mix(in srgb, var(--mat-sys-error) 35%, transparent);
     }
 
     .badge--medium {
-      background-color: #fff1d6;
-      color: #7a4b00;
+      background-color: var(--mat-sys-tertiary-container);
+      color: var(--mat-sys-on-tertiary-container);
       border-color: color-mix(
         in srgb,
         var(--mat-sys-tertiary) 30%,
@@ -48,8 +48,8 @@ import { TaskPriority } from "../../data/models/task.model";
     }
 
     .badge--low {
-      background-color: #e3f0e8;
-      color: #1e5b34;
+      background-color: var(--mat-sys-secondary-container);
+      color: var(--mat-sys-on-secondary-container);
       border-color: color-mix(
         in srgb,
         var(--mat-sys-secondary) 30%,
