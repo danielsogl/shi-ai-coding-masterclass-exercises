@@ -22,5 +22,41 @@
   "enabledMcpjsonServers": [
     "context7",
     "playwright"
-  ]
+  ],
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .agents/hooks/baseline.mjs",
+            "timeout": 300
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .agents/hooks/lint.mjs",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .agents/hooks/verify.mjs",
+            "timeout": 300
+          }
+        ]
+      }
+    ]
+  }
 }

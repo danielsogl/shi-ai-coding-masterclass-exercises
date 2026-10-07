@@ -48,14 +48,14 @@ and is usable with the keyboard and a screen reader.
 
 ## Tasks
 
-- [ ] Failing unit tests for a theme service: default System, Light/Dark set
+- [x] Failing unit tests for a theme service: default System, Light/Dark set
       `color-scheme` on `<html>`, choice stored and read back, unknown value
       treated as System (AC1, AC3, AC5, AC6).
-- [ ] Theme service in `src/app/core/theme/`: a signal with the current
+- [x] Theme service in `src/app/core/theme/`: a signal with the current
       choice, applied to `document.documentElement.style.colorScheme`, stored
       in `localStorage` under one key (AC1–AC6).
-- [ ] Failing component test for the toolbar switch: shows the active option,
+- [x] Failing component test for the toolbar switch: shows the active option,
       picking an option calls the service, accessible name present (AC2, AC7).
-- [ ] Theme switch in `src/app/core/navbar/` (Material button toggle or menu)
+- [x] Theme switch in `src/app/core/navbar/` (Material button toggle or menu)
       wired to the service (AC2, AC7).
-- [ ] `npm run check` green.
+- [x] `npm run check` green.
