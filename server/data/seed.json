@@ -1,0 +1,133 @@
+[
+  {
+    "id": "1",
+    "title": "Set up CI pipeline",
+    "description": "Run typecheck, lint and tests on every pull request",
+    "status": "completed",
+    "priority": "high",
+    "dueDate": "2026-09-25",
+    "createdAt": "2026-09-14",
+    "completedAt": "2026-09-24",
+    "order": 0,
+    "assignee": "ben"
+  },
+  {
+    "id": "2",
+    "title": "Write release notes",
+    "description": "Summarise the September changes for the customer newsletter",
+    "status": "completed",
+    "priority": "low",
+    "dueDate": "2026-09-30",
+    "createdAt": "2026-09-21",
+    "completedAt": "2026-10-01",
+    "order": 1
+  },
+  {
+    "id": "3",
+    "title": "Migrate login to the new auth provider",
+    "description": "Switch the login flow and keep existing sessions valid",
+    "status": "in_progress",
+    "priority": "high",
+    "dueDate": "2026-10-09",
+    "createdAt": "2026-09-22",
+    "order": 0,
+    "assignee": "ana"
+  },
+  {
+    "id": "4",
+    "title": "Fix flaky search results",
+    "description": "Search sometimes returns stale entries after an update",
+    "status": "in_progress",
+    "priority": "medium",
+    "dueDate": "2026-10-06",
+    "createdAt": "2026-09-28",
+    "order": 1,
+    "assignee": "ana"
+  },
+  {
+    "id": "5",
+    "title": "Review accessibility audit",
+    "description": "Go through the audit findings and file tickets for the blockers",
+    "status": "in_progress",
+    "priority": "medium",
+    "dueDate": "2026-10-14",
+    "createdAt": "2026-09-29",
+    "order": 2,
+    "assignee": "ana"
+  },
+  {
+    "id": "6",
+    "title": "Update onboarding guide",
+    "description": "Document the new local setup steps for the team wiki",
+    "status": "in_progress",
+    "priority": "low",
+    "dueDate": "2026-10-16",
+    "createdAt": "2026-09-30",
+    "order": 3,
+    "assignee": "chris"
+  },
+  {
+    "id": "7",
+    "title": "Plan Q4 roadmap",
+    "description": "Collect input from product and agree on the top five goals",
+    "status": "todo",
+    "priority": "high",
+    "dueDate": "2026-10-02",
+    "createdAt": "2026-09-15",
+    "order": 0,
+    "assignee": "ben"
+  },
+  {
+    "id": "8",
+    "title": "Prepare demo for the sprint review",
+    "description": "Pick the stories to show and rehearse the walkthrough",
+    "status": "todo",
+    "priority": "medium",
+    "dueDate": "2026-10-08",
+    "createdAt": "2026-10-01",
+    "order": 1,
+    "assignee": "chris"
+  },
+  {
+    "id": "9",
+    "title": "Check error dashboard",
+    "description": "Look at yesterday's errors and triage anything new",
+    "status": "todo",
+    "priority": "medium",
+    "dueDate": "2026-10-09",
+    "createdAt": "2026-09-01",
+    "order": 2,
+    "assignee": "ben"
+  },
+  {
+    "id": "10",
+    "title": "Team retrospective notes",
+    "description": "Write up the retro outcomes and share them in the channel",
+    "status": "todo",
+    "priority": "low",
+    "dueDate": "2026-10-12",
+    "createdAt": "2026-09-07",
+    "order": 3,
+    "assignee": "ana"
+  },
+  {
+    "id": "11",
+    "title": "Monthly cost report",
+    "description": "Export cloud costs and compare them with the budget",
+    "status": "todo",
+    "priority": "medium",
+    "dueDate": "2026-10-31",
+    "createdAt": "2026-08-31",
+    "order": 4,
+    "assignee": "chris"
+  },
+  {
+    "id": "12",
+    "title": "Evaluate a design system",
+    "description": "Compare two component libraries for the next major version",
+    "status": "todo",
+    "priority": "low",
+    "createdAt": "2026-09-18",
+    "order": 5
+  }
+]

@@ -1,0 +1,36 @@
+// E1 acceptance check: `npm run accept:e1`.
+// Writes the business's acceptance tests next to ThemeService, runs them once
+// and deletes them again. Stored base64 so a search for the rules finds nothing.
+import { spawnSync } from "node:child_process";
+import { existsSync, rmSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import process from "node:process";
+
+const root = join(import.meta.dirname, "..");
+const dir = join(root, "src", "app", "core", "theme");
+const spec = join(dir, "theme.acceptance.spec.ts");
+
+if (!existsSync(join(dir, "theme.service.ts"))) {
+  console.error(
+    "No src/app/core/theme/theme.service.ts yet: build the feature first.",
+  );
+  process.exit(1);
+}
+
+const source =
+  "aW1wb3J0IHsgVGVzdEJlZCB9IGZyb20gIkBhbmd1bGFyL2NvcmUvdGVzdGluZyI7CmltcG9ydCB7IFRoZW1lU2VydmljZSB9IGZyb20gIi4vdGhlbWUuc2VydmljZSI7CgovLyBUaGUgYnVzaW5lc3MgcnVsZXMgZm9yIHRoZSBkYXJrIG1vZGUgdG9nZ2xlLiBOb2JvZHkgd3JvdGUgdGhlbSBkb3duLgpkZXNjcmliZSgiRGFyayBtb2RlIChhY2NlcHRhbmNlKSIsICgpID0+IHsKICBjb25zdCBzY2hlbWUgPSAoKSA9PgogICAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLmdldFByb3BlcnR5VmFsdWUoImNvbG9yLXNjaGVtZSIpOwoKICBjb25zdCBmcmVzaCA9ICgpID0+IHsKICAgIFRlc3RCZWQucmVzZXRUZXN0aW5nTW9kdWxlKCk7CiAgICBjb25zdCBzZXJ2aWNlID0gVGVzdEJlZC5pbmplY3QoVGhlbWVTZXJ2aWNlKTsKICAgIFRlc3RCZWQudGljaygpOwogICAgcmV0dXJuIHNlcnZpY2U7CiAgfTsKCiAgYmVmb3JlRWFjaCgoKSA9PiB7CiAgICBsb2NhbFN0b3JhZ2UuY2xlYXIoKTsKICAgIGRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5zdHlsZS5yZW1vdmVQcm9wZXJ0eSgiY29sb3Itc2NoZW1lIik7CiAgICAvLyBqc2RvbSBoYXMgbm8gbWF0Y2hNZWRpYTsgcHJldGVuZCB0aGUgT1MgaXMgaW4gbGlnaHQgbW9kZS4KICAgIE9iamVjdC5kZWZpbmVQcm9wZXJ0eSh3aW5kb3csICJtYXRjaE1lZGlhIiwgewogICAgICBjb25maWd1cmFibGU6IHRydWUsCiAgICAgIHZhbHVlOiAocXVlcnk6IHN0cmluZykgPT4gKHsKICAgICAgICBtYXRjaGVzOiBmYWxzZSwKICAgICAgICBtZWRpYTogcXVlcnksCiAgICAgICAgb25jaGFuZ2U6IG51bGwsCiAgICAgICAgYWRkRXZlbnRMaXN0ZW5lcjogKCkgPT4gdW5kZWZpbmVkLAogICAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXI6ICgpID0+IHVuZGVmaW5lZCwKICAgICAgICBhZGRMaXN0ZW5lcjogKCkgPT4gdW5kZWZpbmVkLAogICAgICAgIHJlbW92ZUxpc3RlbmVyOiAoKSA9PiB1bmRlZmluZWQsCiAgICAgICAgZGlzcGF0Y2hFdmVudDogKCkgPT4gZmFsc2UsCiAgICAgIH0pLAogICAgfSk7CiAgfSk7CgogIGl0KCJzdGFydHMgaW4gJ3N5c3RlbScgbW9kZSB3aGVuIHRoZSB1c2VyIG5ldmVyIGNob3NlIiwgKCkgPT4gewogICAgZXhwZWN0KGZyZXNoKCkubW9kZSgpKS50b0JlKCJzeXN0ZW0iKTsKICB9KTsKCiAgaXQoIidzeXN0ZW0nIHNldHMgY29sb3Itc2NoZW1lIHRvICdsaWdodCBkYXJrJywgc28gdGhlIGJyb3dzZXIga2VlcHMgZm9sbG93aW5nIHRoZSBPUyIsICgpID0+IHsKICAgIGNvbnN0IHNlcnZpY2UgPSBmcmVzaCgpOwogICAgc2VydmljZS5zZXRNb2RlKCJkYXJrIik7CiAgICBUZXN0QmVkLnRpY2soKTsKICAgIHNlcnZpY2Uuc2V0TW9kZSgic3lzdGVtIik7CiAgICBUZXN0QmVkLnRpY2soKTsKICAgIGV4cGVjdChzY2hlbWUoKSkudG9CZSgibGlnaHQgZGFyayIpOwogIH0pOwoKICBpdCgiJ2RhcmsnIGFuZCAnbGlnaHQnIHNldCBjb2xvci1zY2hlbWUgdG8gZXhhY3RseSB0aGF0IHZhbHVlIiwgKCkgPT4gewogICAgY29uc3Qgc2VydmljZSA9IGZyZXNoKCk7CiAgICBzZXJ2aWNlLnNldE1vZGUoImRhcmsiKTsKICAgIFRlc3RCZWQudGljaygpOwogICAgZXhwZWN0KHNjaGVtZSgpKS50b0JlKCJkYXJrIik7CiAgICBzZXJ2aWNlLnNldE1vZGUoImxpZ2h0Iik7CiAgICBUZXN0QmVkLnRpY2soKTsKICAgIGV4cGVjdChzY2hlbWUoKSkudG9CZSgibGlnaHQiKTsKICB9KTsKCiAgaXQoInJlbWVtYmVycyB0aGUgY2hvaWNlIGFmdGVyIGEgcmVsb2FkIiwgKCkgPT4gewogICAgZnJlc2goKS5zZXRNb2RlKCJkYXJrIik7CiAgICBUZXN0QmVkLnRpY2soKTsKICAgIGNvbnN0IHJlbG9hZGVkID0gZnJlc2goKTsKICAgIGV4cGVjdChyZWxvYWRlZC5tb2RlKCkpLnRvQmUoImRhcmsiKTsKICAgIGV4cGVjdChzY2hlbWUoKSkudG9CZSgiZGFyayIpOwogIH0pOwoKICBpdCgidHJlYXRzIGEgc3RvcmVkIHZhbHVlIGl0IGRvZXMgbm90IGtub3cgYXMgJ3N5c3RlbSciLCAoKSA9PiB7CiAgICBmcmVzaCgpLnNldE1vZGUoImRhcmsiKTsKICAgIFRlc3RCZWQudGljaygpOwogICAgZm9yIChsZXQgaSA9IDA7IGkgPCBsb2NhbFN0b3JhZ2UubGVuZ3RoOyBpKyspIHsKICAgICAgY29uc3Qga2V5ID0gbG9jYWxTdG9yYWdlLmtleShpKTsKICAgICAgaWYgKGtleSkgbG9jYWxTdG9yYWdlLnNldEl0ZW0oa2V5LCAiYmx1ZSIpOwogICAgfQogICAgY29uc3QgcmVsb2FkZWQgPSBmcmVzaCgpOwogICAgZXhwZWN0KHJlbG9hZGVkLm1vZGUoKSkudG9CZSgic3lzdGVtIik7CiAgICBleHBlY3Qoc2NoZW1lKCkpLnRvQmUoImxpZ2h0IGRhcmsiKTsKICB9KTsKfSk7Cg==";
+writeFileSync(spec, Buffer.from(source, "base64").toString("utf8"));
+const ng = join(root, "node_modules", "@angular", "cli", "bin", "ng.js");
+const result = spawnSync(
+  process.execPath,
+  [
+    ng,
+    "test",
+    "--watch=false",
+    "--include",
+    "src/app/core/theme/theme.acceptance.spec.ts",
+  ],
+  { cwd: root, stdio: "inherit" },
+);
+rmSync(spec, { force: true });
+process.exit(result.status ?? 1);

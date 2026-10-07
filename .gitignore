@@ -1,0 +1,12 @@
+node_modules/
+dist/
+out-tsc/
+coverage/
+.angular/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+!server/.env.example
+src/app/core/theme/theme.acceptance.spec.ts

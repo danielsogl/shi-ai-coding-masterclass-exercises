@@ -1,0 +1,9 @@
+{
+  "chat.permissions.default": "default",
+  "chat.useClaudeMdFile": false,
+  "chat.useClaudeHooks": false,
+  "chat.tools.terminal.autoApprove": {
+    "/^npm (test|run (lint|check|typecheck|build|test:app|test:server))\\b/": true,
+    "/^git push\\b/": false
+  }
+}

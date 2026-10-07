@@ -1,0 +1,36 @@
+<section class="column column--{{ status() }}">
+  <header class="column-header">
+    <span class="column-dot" aria-hidden="true"></span>
+    <h2 class="column-title">{{ title() }}</h2>
+    <span class="column-count">{{ tasks().length }}</span>
+  </header>
+
+  <div
+    class="column-body"
+    cdkDropList
+    [id]="dropListId()"
+    [cdkDropListData]="tasks()"
+    [cdkDropListConnectedTo]="connectedTo()"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    @for (task of tasks(); track task.id) {
+      <app-task-card
+        [task]="task"
+        cdkDrag
+        [cdkDragData]="task"
+        (edit)="editTask.emit($event)"
+        (delete)="deleteTask.emit($event)"
+      />
+    }
+
+    @if (tasks().length === 0) {
+      <div class="column-empty">
+        <span class="column-empty-icon" aria-hidden="true">
+          <mat-icon>inbox</mat-icon>
+        </span>
+        <p>No tasks</p>
+        <span class="column-empty-hint">Drop a card here</span>
+      </div>
+    }
+  </div>
+</section>

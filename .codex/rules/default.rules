@@ -1,0 +1,3 @@
+# Workshop rules: tests and npm scripts run without asking; work stays local.
+prefix_rule(pattern=["npm", ["test", "run"]], decision="allow")
+prefix_rule(pattern=["git", "push"], decision="forbidden", justification="Work stays local in this workshop.")
