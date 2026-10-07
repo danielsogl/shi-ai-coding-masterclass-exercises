@@ -16,5 +16,18 @@
   "prettier.documentSelectors": ["**/*.feature"],
   "[cucumber]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // Sandbox (Copilot harness, VS Code 1.143). The agent's terminal commands run in it; Windows is experimental.
+  // allowDevToolAccess (default on) already opens the npm and Node manager folders.
+  // readwritePaths adds the Angular CLI cache and config.
+  // Known limit: VS Code always lets the sandbox read the workspace, so deniedPaths may not hide
+  // server/.env from a terminal command. The preToolUse hook in .github/hooks is the guard here,
+  // and it is also what stops git push: "false" above only asks.
+  "chat.agent.sandbox.enabled": "on",
+  "chat.agent.sandbox.allowUnsandboxedCommands": false,
+  "chat.agent.sandbox.fileSystem.userConfiguredPaths": {
+    "readwritePaths": ["~/.npm", "~/.angular"],
+    "readonlyPaths": ["~/.npmrc", "~/.angular-config.json"],
+    "deniedPaths": ["./server/.env"]
   }
 }

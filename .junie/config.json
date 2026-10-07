@@ -3,7 +3,12 @@
     "SessionStart": [
       {
         "matcher": "startup|resume",
-        "hooks": [{ "type": "command", "command": "node \"$(git rev-parse --show-toplevel)/.agents/hooks/baseline.mjs\"" }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.agents/hooks/baseline.mjs\""
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -14,7 +19,23 @@
     ],
     "Stop": [
       {
-        "hooks": [{ "type": "command", "command": "node \"$(git rev-parse --show-toplevel)/.agents/hooks/verify.mjs\"" }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.agents/hooks/verify.mjs\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Read|Write|Edit|Glob|Grep|apply_patch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.agents/hooks/deny-env.mjs\""
+          }
+        ]
       }
     ]
   }

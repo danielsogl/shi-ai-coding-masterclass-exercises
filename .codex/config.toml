@@ -1,3 +1,33 @@
+# E8: no .env reads, also not for programs the agent starts (permission profiles are beta).
+# Read the whole disk so node and npm start; write only in the project, the temp dir and the npm cache.
+default_permissions = "workshop"
+
+[permissions.workshop.filesystem]
+":root" = "read"
+":tmpdir" = "write"
+"~/.npm" = "write"
+"~/.angular" = "write"
+"~/.cache" = "write"
+
+[permissions.workshop.filesystem.":workspace_roots"]
+"." = "write"
+"server/.env" = "deny"
+
+# Network: only the npm registry and localhost (the server tests open a local port).
+# The domain rules are enforced only while the network proxy runs (experimental).
+[features.network_proxy]
+enabled = true
+
+[permissions.workshop.network]
+enabled = true
+mode = "limited"
+allow_local_binding = true
+
+[permissions.workshop.network.domains]
+"registry.npmjs.org" = "allow"
+"localhost" = "allow"
+"127.0.0.1" = "allow"
+
 [mcp_servers.context7]
 url = "https://mcp.context7.com/mcp"
 
