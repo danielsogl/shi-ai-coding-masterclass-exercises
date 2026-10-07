@@ -1,0 +1,21 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [{ "type": "command", "command": "node \"$(git rev-parse --show-toplevel)/.agents/hooks/baseline.mjs\"" }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|apply_patch",
+        "hooks": [{ "type": "command", "command": "node \"$(git rev-parse --show-toplevel)/.agents/hooks/lint.mjs\"" }]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [{ "type": "command", "command": "node \"$(git rev-parse --show-toplevel)/.agents/hooks/verify.mjs\"" }]
+      }
+    ]
+  }
+}
