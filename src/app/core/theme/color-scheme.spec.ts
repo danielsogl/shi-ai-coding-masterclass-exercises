@@ -6,4 +6,10 @@ describe("colorSchemeFor", () => {
       expect(colorSchemeFor(choice)).toBeTruthy();
     }
   });
+
+  it("maps each choice to its color scheme", () => {
+    expect(colorSchemeFor("light")).toBe("light");
+    expect(colorSchemeFor("dark")).toBe("dark");
+    expect(colorSchemeFor("system")).toBe("light dark");
+  });
 });
