@@ -2,7 +2,7 @@
   position: relative;
   cursor: grab;
   border-radius: 16px;
-  background: #ffffff;
+  background: var(--mat-sys-surface-container-lowest);
   border: 1px solid
     color-mix(in srgb, var(--mat-sys-outline-variant) 60%, transparent);
   box-shadow: none;
@@ -106,14 +106,14 @@ mat-card-content {
   font-weight: 600;
   letter-spacing: -0.005em;
   line-height: 1.3;
-  color: #1f2937;
+  color: var(--mat-sys-on-surface);
 }
 
 .task-description {
   margin: 0;
   font-size: 13px;
   line-height: 1.5;
-  color: #6b7280;
+  color: var(--mat-sys-on-surface-variant);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
