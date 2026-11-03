@@ -1,0 +1,16 @@
+{
+  "file-name": ["error", { "style": "kebab-case" }],
+  "keywords-in-logical-order": "error",
+  "no-dupe-feature-names": "error",
+  "no-dupe-scenario-names": ["error", "in-feature"],
+  "no-empty-background": "error",
+  "no-empty-file": "error",
+  "no-files-without-scenarios": "error",
+  "no-scenario-outlines-without-examples": "error",
+  "no-unnamed-features": "error",
+  "no-unnamed-scenarios": "error",
+  "no-unused-variables": "error",
+  "no-superfluous-tags": "warn",
+  "no-homogenous-tags": "warn",
+  "use-and": "warn"
+}

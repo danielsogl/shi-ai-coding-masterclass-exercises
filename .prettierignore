@@ -1,3 +1,6 @@
 dist
 coverage
 .angular
+.features-gen/
+playwright-report/
+test-results/

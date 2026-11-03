@@ -5,9 +5,17 @@ import tseslint from "typescript-eslint";
 import angular from "angular-eslint";
 import ngrx from "@ngrx/eslint-plugin";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import playwright from "eslint-plugin-playwright";
 
 export default defineConfig([
-  globalIgnores(["dist/", "coverage/", ".angular/"]),
+  globalIgnores([
+    "dist/",
+    "coverage/",
+    ".angular/",
+    ".features-gen/",
+    "playwright-report/",
+    "test-results/",
+  ]),
   {
     files: ["**/*.ts"],
     extends: [
@@ -59,5 +67,13 @@ export default defineConfig([
       angular.configs.templateAccessibility,
     ],
     rules: {},
+  },
+  {
+    files: ["e2e/**/*.ts"],
+    extends: [playwright.configs["flat/recommended"]],
+    rules: {
+      // playwright-bdd steps (Given/When/Then) are not test() blocks.
+      "playwright/no-standalone-expect": "off",
+    },
   },
 ]);

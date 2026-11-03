@@ -53,15 +53,17 @@ Material 3 tokens. That is on purpose: it is part of the dark mode work.
 
 ## Scripts
 
-| Script                  | What it does                                         |
-| ----------------------- | ---------------------------------------------------- |
-| `npm start`             | API and Angular dev server together                  |
-| `npm run typecheck`     | `tsc --noEmit` for the app, its specs and the server |
-| `npm run lint`          | ESLint (angular-eslint, typescript-eslint)           |
-| `npm test`              | `test:app`, then `test:server`                       |
-| `npm run test:app`      | Angular unit tests (`ng test`, Vitest, run once)     |
-| `npm run test:server`   | API tests (Vitest, Node)                             |
-| `npm run test:affected` | only the tests related to your uncommitted change    |
-| `npm run check`         | typecheck, lint and test, in that order              |
-| `npm run accept:e1`     | the business acceptance check for exercise E1        |
-| `npm run preflight`     | workshop readiness check                             |
+| Script                   | What it does                                         |
+| ------------------------ | ---------------------------------------------------- |
+| `npm start`              | API and Angular dev server together                  |
+| `npm run typecheck`      | `tsc --noEmit` for the app, its specs and the server |
+| `npm run lint`           | ESLint (+ Playwright rules), gplint for `.feature`   |
+| `npm test`               | `test:app`, then `test:server`                       |
+| `npm run test:app`       | Angular unit tests (`ng test`, Vitest, run once)     |
+| `npm run test:server`    | API tests (Vitest, Node)                             |
+| `npm run test:e2e`       | E2E tests (Playwright + playwright-bdd, Gherkin)     |
+| `npm run test:e2e:steps` | sync E2E steps with `.feature` (rename, add stubs)   |
+| `npm run test:affected`  | only the tests related to your uncommitted change    |
+| `npm run check`          | typecheck, lint and test, in that order              |
+| `npm run accept:e1`      | the business acceptance check for exercise E1        |
+| `npm run preflight`      | workshop readiness check                             |
