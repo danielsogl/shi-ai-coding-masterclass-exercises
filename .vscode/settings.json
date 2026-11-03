@@ -5,5 +5,19 @@
   "chat.tools.terminal.autoApprove": {
     "/^npm (test|run (lint|check|typecheck|build|test:app|test:server))\\b/": true,
     "/^git push\\b/": false
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "cucumber.features": ["e2e/features/**/*.feature", "src/**/*.feature"],
+  "cucumber.glue": ["e2e/steps/**/*.ts", "src/**/*.feature.spec.ts"],
+  "files.exclude": {
+    ".features-gen": true
+  },
+  "search.exclude": {
+    ".features-gen": true
+  },
+  "prettier.documentSelectors": ["**/*.feature"],
+  "[cucumber]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
