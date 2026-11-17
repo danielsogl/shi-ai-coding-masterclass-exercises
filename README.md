@@ -34,6 +34,11 @@ git switch -c my-e1 origin/exercise/e1
 
 The slides name the branch for each exercise.
 
+From E6 on, the branches carry agent hooks for Claude Code, Copilot, Codex
+and Junie. Start a new session after switching branches. Codex asks you
+to approve the hooks in `/hooks`. Junie CLI loads them only when started
+with `junie --config-location .junie/config.json`.
+
 ## What's in here
 
 ```
