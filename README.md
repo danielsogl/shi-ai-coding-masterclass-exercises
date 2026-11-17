@@ -39,14 +39,10 @@ and Junie. Start a new session after switching branches. Codex asks you
 to approve the hooks in `/hooks`. Junie CLI loads them only when started
 with `junie --config-location .junie/config.json`.
 
-Claude Code starts in auto mode by default. Auto mode rules are not read
-from `.claude/settings.json`, so the workshop rules (no `.env`, no push,
-no new packages) live in their own file:
-
-```sh
-claude --settings .claude/auto-mode.json
-claude --settings .claude/auto-mode.json auto-mode config   # show the rules in use
-```
+Claude Code starts in auto mode by default. `.claude/settings.json` keeps
+`git push` denied and asks before new packages or pull requests; auto mode
+honours both. Auto mode's own rules (`autoMode`) are not read from project
+settings, only from `~/.claude/settings.json`.
 
 ## What's in here
 
