@@ -20,7 +20,7 @@ const run = (script) =>
   });
 
 const failing = [];
-for (const script of ["test", "accept:e1"]) {
+for (const script of ["test", "accept"]) {
   const r = run(script);
   if (r.status !== 0) {
     const all = `${r.stdout}${r.stderr}`.replace(/\x1b\[[0-9;]*m/g, "").split("\n");
