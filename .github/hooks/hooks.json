@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "agentStop": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/done-gate.mjs",
+        "powershell": "node .github/hooks/done-gate.mjs",
+        "timeoutSec": 300
+      }
+    ]
+  }
+}
