@@ -22,7 +22,8 @@
     "test:affected": "node scripts/test-affected.mjs",
     "check": "npm run typecheck && npm run lint && npm test",
     "preflight": "node scripts/preflight.mjs",
-    "accept:e1": "node scripts/accept-e1.mjs"
+    "accept:e1": "node scripts/accept-e1.mjs",
+    "accept": "node scripts/accept.mjs"
   },
   "dependencies": {
     "@angular/cdk": "^22.2.7",
